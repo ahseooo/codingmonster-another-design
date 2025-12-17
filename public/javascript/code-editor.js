@@ -173,17 +173,22 @@ function updateActiveButton(activeLang) {
 document.addEventListener('DOMContentLoaded', () => {
     // 취소 버튼
     const btnCancel = document.getElementById('btnCancel');
-    btnCancel.addEventListener('click', () => {
+    if(btnCancel) {
+        btnCancel.addEventListener('click', () => {
         closeModal();
     });
+        
+    }
 
     // 변경 버튼
     const btnConfirm = document.getElementById('btnConfirm');
-    btnConfirm.addEventListener('click', () => {
-        if(pendingLanguage) {
-            changeLanguage(pendingLanguage);
-        }
-    });
+    if(btnConfirm) {
+        btnConfirm.addEventListener('click', () => {
+            if(pendingLanguage) {
+                changeLanguage(pendingLanguage);
+            }
+        });
+    }
 
     modal.addEventListener('click', (e) => {
         if(e.target === modal) {
