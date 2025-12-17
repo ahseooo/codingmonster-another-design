@@ -83,20 +83,21 @@ function initializeLanguageButtons() {
 
     // 초기 상태 설정
     updateActiveButton(currentLanguage);
+    if(languageButtons) {
+        languageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const selectedLanguage = button.dataset.lang;
 
-    languageButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const selectedLanguage = button.dataset.lang;
+                if(selectedLanguage === currentLanguage) {
+                    return;
+                }
 
-            if(selectedLanguage === currentLanguage) {
-                return;
-            }
-
-            if(selectedLanguage && selectedLanguage !== currentLanguage) {
-                attemptLanguageChange(selectedLanguage);
-            }
+                if(selectedLanguage && selectedLanguage !== currentLanguage) {
+                    attemptLanguageChange(selectedLanguage);
+                }
+            });
         });
-    });
+    }
 }
 
 // 언어 변경 시도
@@ -190,12 +191,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    modal.addEventListener('click', (e) => {
-        if(e.target === modal) {
-            console.log('❌ 모달 외부 클릭으로 취소');
-            closeModal();
-        }
-    });
+    if(modal) {
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                console.log('❌ 모달 외부 클릭으로 취소');
+                closeModal();
+            }
+        });
+    }
 
     // ESC 키로 모달 닫기
     document.addEventListener('keydown', (e) => {
