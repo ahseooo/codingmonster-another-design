@@ -27,7 +27,7 @@ require(['vs/editor/editor.main'], function () {
     });
 
     // 에디터 초기화 완료 후 언어 버튼 초기화
-    initializeLanguageButtons();
+    // initializeLanguageButtons();
 });
 
 // 기본 코드 템플릿
