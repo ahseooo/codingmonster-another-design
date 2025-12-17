@@ -78,136 +78,136 @@ public class Main {
 
 // 언어 변경 관련
 
-// 언어 버튼 초기화
-function initializeLanguageButtons() {
+// // 언어 버튼 초기화
+// function initializeLanguageButtons() {
 
-    // 초기 상태 설정
-    updateActiveButton(currentLanguage);
-    if(languageButtons) {
-        languageButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const selectedLanguage = button.dataset.lang;
+//     // 초기 상태 설정
+//     updateActiveButton(currentLanguage);
+//     if(languageButtons) {
+//         languageButtons.forEach(button => {
+//             button.addEventListener('click', () => {
+//                 const selectedLanguage = button.dataset.lang;
 
-                if(selectedLanguage === currentLanguage) {
-                    return;
-                }
+//                 if(selectedLanguage === currentLanguage) {
+//                     return;
+//                 }
 
-                if(selectedLanguage && selectedLanguage !== currentLanguage) {
-                    attemptLanguageChange(selectedLanguage);
-                }
-            });
-        });
-    }
-}
+//                 if(selectedLanguage && selectedLanguage !== currentLanguage) {
+//                     attemptLanguageChange(selectedLanguage);
+//                 }
+//             });
+//         });
+//     }
+// }
 
-// 언어 변경 시도
-function attemptLanguageChange(selectedLanguage) {
-    // 변경할 언어 정보 저장
-    pendingLanguage = selectedLanguage;
+// // 언어 변경 시도
+// function attemptLanguageChange(selectedLanguage) {
+//     // 변경할 언어 정보 저장
+//     pendingLanguage = selectedLanguage;
 
-    // 모달 표시
-    showModal(currentLanguage.toUpperCase(), selectedLanguage.toUpperCase());
-}
+//     // 모달 표시
+//     showModal(currentLanguage.toUpperCase(), selectedLanguage.toUpperCase());
+// }
 
-// 모달 표시
-function showModal(currentLang, selectedLang) {
-    const modalCurrentLang = document.getElementById('modalCurrentLang');
-    const modalselectedLang = document.getElementById('modalselectedLang');
+// // 모달 표시
+// function showModal(currentLang, selectedLang) {
+//     const modalCurrentLang = document.getElementById('modalCurrentLang');
+//     const modalselectedLang = document.getElementById('modalselectedLang');
 
-    if(modal && modalCurrentLang && modalselectedLang) {
-        modalCurrentLang.textContent = currentLang;
-        modalselectedLang.textContent = selectedLang;
-        modal.classList.add('show');
-    }
-}
+//     if(modal && modalCurrentLang && modalselectedLang) {
+//         modalCurrentLang.textContent = currentLang;
+//         modalselectedLang.textContent = selectedLang;
+//         modal.classList.add('show');
+//     }
+// }
 
-// 모달 닫기
-function closeModal() {
-    if(modal) {
-        modal.classList.remove('show');
-        pendingLanguage = null;
-    }
-}
+// // 모달 닫기
+// function closeModal() {
+//     if(modal) {
+//         modal.classList.remove('show');
+//         pendingLanguage = null;
+//     }
+// }
 
-// 언어 변경 실행
-function changeLanguage(selectedLanguage) {
-    console.log(`🔄 언어 변경: ${currentLanguage} → ${selectedLanguage}`);
+// // 언어 변경 실행
+// function changeLanguage(selectedLanguage) {
+//     console.log(`🔄 언어 변경: ${currentLanguage} → ${selectedLanguage}`);
     
-    sessionStorage.setItem('selectedLanguage', selectedLanguage)
-    currentLanguage = selectedLanguage;
+//     sessionStorage.setItem('selectedLanguage', selectedLanguage)
+//     currentLanguage = selectedLanguage;
 
-    if(editor) {
-        // Monaco Editor 기본 언어 설정
-        const monacoLanguage = getMonacoLanguage(selectedLanguage);
-        monaco.editor.setModelLanguage(editor.getModel(), monacoLanguage);
+//     if(editor) {
+//         // Monaco Editor 기본 언어 설정
+//         const monacoLanguage = getMonacoLanguage(selectedLanguage);
+//         monaco.editor.setModelLanguage(editor.getModel(), monacoLanguage);
 
-        editor.setValue(getDefaultCode(selectedLanguage));       // 기본 코드 설정
-        updateActiveButton(selectedLanguage);                    // 활성 버튼 스타일 업데이트
-        clearOutput();                                      // 출력 화면 초기화
-        document.getElementById('output').textContent = '여기에 실행 결과가 표시됩니다.';
+//         editor.setValue(getDefaultCode(selectedLanguage));       // 기본 코드 설정
+//         updateActiveButton(selectedLanguage);                    // 활성 버튼 스타일 업데이트
+//         clearOutput();                                      // 출력 화면 초기화
+//         document.getElementById('output').textContent = '여기에 실행 결과가 표시됩니다.';
         
-        fetchQuests();
-    }
+//         fetchQuests();
+//     }
 
-    closeModal();
-}
+//     closeModal();
+// }
 
-function getMonacoLanguage(language) {
-    const monacoMapping = {
-        'html': 'html',
-        'javascript': 'javascript',
-        'python': 'python',
-        'java': 'java'
-    };
-    return monacoMapping[language] || language;
-}
+// function getMonacoLanguage(language) {
+//     const monacoMapping = {
+//         'html': 'html',
+//         'javascript': 'javascript',
+//         'python': 'python',
+//         'java': 'java'
+//     };
+//     return monacoMapping[language] || language;
+// }
 
-// 활성 버튼 스타일 업데이트
-function updateActiveButton(activeLang) {
-    languageButtons.forEach(button => {
-        const buttonLang = button.dataset.lang;
-        button.classList.toggle('active', buttonLang === activeLang);
-    });
-}
+// // 활성 버튼 스타일 업데이트
+// function updateActiveButton(activeLang) {
+//     languageButtons.forEach(button => {
+//         const buttonLang = button.dataset.lang;
+//         button.classList.toggle('active', buttonLang === activeLang);
+//     });
+// }
 
-// 모달 버튼 이벤트
-document.addEventListener('DOMContentLoaded', () => {
-    // 취소 버튼
-    const btnCancel = document.getElementById('btnCancel');
-    if(btnCancel) {
-        btnCancel.addEventListener('click', () => {
-        closeModal();
-    });
+// // 모달 버튼 이벤트
+// document.addEventListener('DOMContentLoaded', () => {
+//     // 취소 버튼
+//     const btnCancel = document.getElementById('btnCancel');
+//     if(btnCancel) {
+//         btnCancel.addEventListener('click', () => {
+//         closeModal();
+//     });
         
-    }
+//     }
 
-    // 변경 버튼
-    const btnConfirm = document.getElementById('btnConfirm');
-    if(btnConfirm) {
-        btnConfirm.addEventListener('click', () => {
-            if(pendingLanguage) {
-                changeLanguage(pendingLanguage);
-            }
-        });
-    }
+//     // 변경 버튼
+//     const btnConfirm = document.getElementById('btnConfirm');
+//     if(btnConfirm) {
+//         btnConfirm.addEventListener('click', () => {
+//             if(pendingLanguage) {
+//                 changeLanguage(pendingLanguage);
+//             }
+//         });
+//     }
 
-    if(modal) {
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) {
-                console.log('❌ 모달 외부 클릭으로 취소');
-                closeModal();
-            }
-        });
-    }
+//     if(modal) {
+//         modal.addEventListener('click', (e) => {
+//             if(e.target === modal) {
+//                 console.log('❌ 모달 외부 클릭으로 취소');
+//                 closeModal();
+//             }
+//         });
+//     }
 
-    // ESC 키로 모달 닫기
-    document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && modal && modal.classList.contains('show')) {
-            console.log('❌ ESC 키로 취소');
-            closeModal();
-        }
-    });
-});
+//     // ESC 키로 모달 닫기
+//     document.addEventListener('keydown', (e) => {
+//         if(e.key === 'Escape' && modal && modal.classList.contains('show')) {
+//             console.log('❌ ESC 키로 취소');
+//             closeModal();
+//         }
+//     });
+// });
 
 // 출력 화면 지우기
 function clearOutput() {
