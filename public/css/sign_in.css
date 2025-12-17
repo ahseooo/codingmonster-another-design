@@ -210,8 +210,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* 내부 이미지가 튀어나오지 않게 */
-    
+    overflow: hidden;
     box-shadow: none; 
     margin: 0;
 }
@@ -246,7 +245,6 @@ body {
     background: #fee500;
     border-color: #fee500;
     border-bottom-color: #dcb500; /* 진한 노란색/갈색톤 */
-    object-fit: contain; /* 카카오 로고 비율 유지 */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -259,7 +257,7 @@ body {
 .google-wrap:hover {
     transform: translateY(3px); /* 3px 만큼 눌림 */
     border-bottom-width: 2px;   /* 두꺼운 아랫면이 줄어듦 */
-    filter: brightness(0.95);   /* 살짝 어둡게 반응 */
+    filter: brightness(0.9);   /* 살짝 어둡게 반응 */
     box-shadow: none;           /* 그림자 제거 */
 }
 
