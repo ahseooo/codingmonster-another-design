@@ -2,17 +2,44 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+
+const MySQLStore = require('express-mysql-session')(session);
+const pool = require('./mysqlDB');
+
 const app = express();
 const PORT = process.env.PORT;
 
+// velcel 쿠키 저장용
+app.set('trust proxy', 1);
+
 app.use(express.json({ limit: '10mb' }));
+
+const sessionStore = new MySQLStore({
+    expiration: 10800000, // 3시간
+    createDatabaseTable: true, // sessions 테이블 없으면 자동 생성
+    schema: {
+        tableName: 'sessions',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
+}, pool);
 
 // for login flow
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
+    store: sessionStore,
     resave: false,
     saveUninitialized: true,
-    cookie: { httpOnly: true }
+    cookie: {
+        httpOnly: true,
+        // 👇 배포 환경(Vercel)에서는 true, 로컬에서는 false 자동 전환
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 1000 * 60 * 60 * 24 // 1일 유지
+    }
 }));
 
 // public 폴더를 정적 파일로 제공
