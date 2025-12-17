@@ -46,16 +46,16 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 레벨퀘스트 이미지
-app.use('/quest-images', express.static('src-quest'));
+app.use('/quest-images', express.static(__dirname, 'public/src-quest'));
 
 // 랭킹 페이지 벳지 이미지
-app.use('/badge-img', express.static('src-badge'));
+app.use('/badge-img', express.static(__dirname, 'public/src-badge'));
 
 // 프로필 아이콘 이미지
-app.use('/profile', express.static('src-profile'));
+app.use('/profile', express.static(__dirname, 'public/src-profile'));
 
 // 티어 이미지
-app.use('/tier-img', express.static('src-tier'));
+app.use('/tier-img', express.static(__dirname, 'public/src-tier'));
 
 // 로그인 후 이용 가능한 페이지
 const isLoggedInRouter = require('./Router/loggedin-session');
