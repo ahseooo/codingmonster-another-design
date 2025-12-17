@@ -1,0 +1,400 @@
+/* sub_frame.css - Nerf Blaster Edition */
+/* Rainking, MyRanking, Community, Setting, Service 페이지 사이드바 */
+/* 사이드바 시작 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap");
+/* =========================================
+   [1] 너프건 테마 변수 정의 (4색 팔레트)
+   ========================================= */
+:root {
+    /* 너프 시그니처 컬러 */
+    --nerf-orange: #ff6b00;     /* 메인 액션/헤더 포인트 */
+    --nerf-blue: #0066cc;       /* 메인 베이스/버튼 */
+    --nerf-green: #00CC00;      /* 활성/성공 포인트 */
+    --nerf-red: #cc0000;        /* 경고/취소 포인트 */
+    --nerf-grey: #2d3436;       /* 부품/테두리 (아주 진함) */
+    --nerf-white: #ffffff;
+    
+    /* 너프 디자인 요소 */
+    --plastic-border: 5px solid var(--nerf-grey);
+    --plastic-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+    
+    /* 사이드바 최종 변수 매핑 */
+    --sidebar-bg: var(--nerf-grey);
+    --sidebar-text: var(--nerf-white);
+    --sidebar-hover-bg: rgba(255, 107, 0, 0.2); /* 연한 오렌지 투명 배경 */
+    --dark-bg-color: var(--nerf-grey); /* 헤더 배경 */
+    --accent-color: var(--nerf-green); /* 서브 메뉴 호버 */
+    --text-color: var(--nerf-white);
+    
+    /* 기존 변수 대체 */
+    --neon-blue: var(--nerf-blue);
+    --neon-green: var(--nerf-green);
+    --neon-red: var(--nerf-red);
+    --sidebar-shadow: var(--plastic-shadow);
+    --bg-secondary: #f0f0f0; /* 메인 콘텐츠 기본 배경 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Consolas", "Monaco", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html,
+body {
+    color: var(--text-color);
+    height: 100%;
+    width: 100%;
+}
+
+
+/* =========================================
+   [2] 사이드바 본체 (Chunky Plastic Panel)
+   ========================================= */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 255px;
+    background: var(--sidebar-bg);
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    
+    /* 두꺼운 주황색 테두리와 그림자 */
+    border-right: 5px solid var(--nerf-orange);
+    box-shadow: 10px 0 0 0 var(--nerf-grey); /* 두꺼운 그림자 */
+}
+
+.sidebar.close {
+    width: 75px;
+    z-index: 100;
+}
+
+/* 로고 영역 (오렌지색 헤더 바) */
+.sidebar .logo-details {
+    height: 60px;
+    width: 100%;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--nerf-orange);
+    border-bottom: 3px solid var(--nerf-grey);
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.3);
+}
+
+.sidebar .logo-details .logo-icon {
+    font-size: 30px;
+    height: 50px;
+    min-width: 75px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar .logo-details i img {
+    width: 50px;
+    height: 50px;
+    filter: none; /* 네온 필터 제거 */
+}
+
+.sidebar .logo-details label .logo_title { 
+    white-space: nowrap;
+    font-size: 20px;
+    color: var(--nerf-white);
+    font-weight: 800;
+    text-shadow: 2px 2px 0 var(--nerf-red); /* 만화 같은 입체 텍스트 */
+    transition: all 0.2s ease 0.1s;
+}
+
+.sidebar .nav-lists {
+    height: calc(100% - 110px);
+    padding: 10px 0 150px 0;
+    overflow: auto;
+    background: var(--nerf-grey);
+}
+
+.sidebar.close .nav-lists {
+    overflow: visible;
+}
+
+.sidebar .nav-lists::-webkit-scrollbar {
+    display: none;
+}
+
+/* 메뉴 리스트 아이템 */
+.sidebar .nav-lists li {
+    position: relative;
+    color: var(--sidebar-text);
+    list-style: none;
+    transition: all 0.2s ease;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar .nav-lists li:hover {
+    background: var(--sidebar-hover-bg);
+}
+
+.sidebar .nav-lists li:hover .sub-category {
+    background: rgba(0, 0, 0, 0.7); 
+}
+
+.sidebar .nav-lists li .icon-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar .nav-lists li i {
+    height: 50px;
+    min-width: 75px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 22px;
+    color: var(--nerf-blue); /* 아이콘 기본색: 파란색 */
+    text-shadow: none; /* 네온 그림자 제거 */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-lists li a {
+    text-decoration: none;
+    color: var(--nerf-white);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: 700;
+}
+
+.sidebar .nav-lists li:hover a {
+    opacity: 1;
+}
+
+.sidebar .nav-lists li a .nav-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nerf-white);
+    transition: all 0.2s ease 0.1s;
+    min-width: 100px;
+}
+
+/* 서브 카테고리 */
+.sidebar .nav-lists li .sub-category {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    padding: 10px 6px 10px 78px;
+    margin-top: 0;
+    display: none;
+    border-left: 5px solid var(--nerf-green); /* 서브 메뉴 초록색 포인트 */
+}
+
+.sidebar .nav-lists li.showCategory .sub-category {
+    display: block;
+}
+
+.sidebar .nav-lists li .sub-category a {
+    color: var(--nerf-white);
+    font-size: 15px;
+    padding: 6px 0;
+    white-space: nowrap;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.sidebar .nav-lists li .sub-category a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 0;
+    opacity: 1;
+    background: transparent;
+}
+
+.sidebar .nav-lists li .sub-category li:hover {
+    background: none;
+}
+
+/* 닫힌 상태 호버 시 서브 메뉴 */
+.sidebar.close .nav-lists li .sub-category {
+    position: absolute;
+    left: 100%;
+    top: -8px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    border: 3px solid var(--nerf-orange); /* 외부 테두리 오렌지 */
+    background: var(--nerf-grey);
+    box-shadow: var(--plastic-shadow);
+}
+
+.sidebar.close .nav-lists li:hover .sub-category {
+    top: 0px;
+    opacity: 1;
+    display: block;
+    pointer-events: auto;
+    transition: all 0.2s ease;
+    border-left: 3px solid var(--nerf-green); /* 활성 포인트 */
+}
+
+.sidebar .nav-lists li .sub-category .nav-name {
+    display: none;
+}
+
+.sidebar.close .nav-lists li .sub-category .nav-name {
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+    color: var(--nerf-orange);
+    text-shadow: none;
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+
+.sidebar .nav-lists li .sub-category.blank {
+    top: -8px;
+    padding: 6px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar .nav-lists li:hover .sub-category.blank {
+    top: 0;
+}
+
+
+.sidebar .log-out-details {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar .log-out-details a {
+    color: var(--nerf-red); /* 로그아웃은 빨간색 */
+    text-decoration: none;
+    text-align: center;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.sidebar .log-out-details a:hover {
+    opacity: 0.8;
+}
+
+.sidebar .log-out-details a i {
+    height: 50px;
+    min-width: 75px;
+    text-align: center;
+    line-height: 50px;
+    color: var(--nerf-red);
+    font-size: 20px;
+}
+
+.sidebar .log-out-details a span {
+    font-size: 18px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 1;
+    color: var(--nerf-red);
+    transition: all 0.2s ease 0.1s;
+}
+
+.sidebar.close .logo-details label .logo_title,
+.sidebar.close .nav-lists .arrow,
+.sidebar.close .nav-lists li a .nav-name,
+.sidebar.close .log-out-details a span {
+    transition: all 0.3s ease;
+    transition-delay: 0s;
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.is-closing .nav-lists li .sub-category {
+    display: none;
+}
+/* 사이드바 끝 */
+
+
+/* =========================================
+   [3] 헤더 섹션 (Tactical Bar)
+   ========================================= */
+.header-section {
+    position: relative;
+    left: 255px;
+    width: calc(100% - 255px);
+    height: 60px;
+    
+    /* 너프건 스타일: 어두운 배경, 주황색 하단 바, 두꺼운 그림자 */
+    background: var(--dark-bg-color); /* nerf-grey */
+    border-bottom: 5px solid var(--nerf-orange); 
+    box-shadow: 0 8px 0 rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.sidebar.close~.header-section {
+    left: 75px;
+    width: calc(100% - 75px);
+    transition: all 0.3s ease;
+    transition-delay: 0s;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    height: 100%;
+    gap: 20px;
+}
+
+.header-content .fa-bars {
+    color: var(--nerf-green); /* 햄버거 아이콘은 초록색 */
+    font-size: 24px; 
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.header-content .fa-bars:hover {
+    transform: scale(1.15);
+    color: var(--nerf-yellow); /* 호버 시 노란색 */
+    box-shadow: none;
+}
+
+.header-content .title {
+    color: var(--nerf-white);
+    font-size: 22px;
+    font-weight: 800;
+    text-shadow: 2px 2px 0 var(--nerf-blue); /* 파란색 입체 텍스트 */
+}
+
+/* 메인 섹션 */
+.home-section {
+    position: relative;
+    left: 255px;
+    width: calc(100vw - 255px);
+    height: calc(100vh - 60px);
+    transition: all 0.3s ease;
+    padding: 30px;
+    /* LevelQuestMap.css에서 배경을 담당하므로 기본값은 유지 */
+    /* background: var(--bg-secondary); */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar.close~.home-section {
+    left: 75px;
+    width: calc(100% - 75px);
+}
+

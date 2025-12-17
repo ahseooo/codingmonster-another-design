@@ -1,0 +1,244 @@
+/* Event.css - Nerf Blaster Edition (Dark Mission Crate) */
+/* ==========================================================================
+   1. 초기화 및 변수 (Base & Variables)
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("./sub_frame.css");
+
+/* =========================================
+   [1] 너프건 테마 변수 (다크 에디션 팔레트)
+   ========================================= */
+:root {
+    /* 너프 시그니처 컬러 */
+    --nerf-orange: #ff6b00;     /* 메인 액션 (트리거) */
+    --nerf-blue: #0066cc;       /* 엘리트 블루 */
+    --nerf-dark-blue: #003366;  /* 깊은 네이비 (배경용) */
+    --nerf-green: #00CC00;      /* 성공 */
+    --nerf-red: #cc0000;        /* 경고 */
+    --nerf-grey: #2d3436;       /* 진한 회색 (프레임) */
+    --nerf-dark-grey: #1a1a1a;  /* 더 진한 회색 (컨테이너 배경) */
+    --nerf-white: #ffffff;
+    --nerf-yellow: #ffd500;
+    
+    /* 디자인 요소 */
+    --plastic-border: 4px solid var(--nerf-grey);
+    --plastic-shadow: 6px 6px 0 rgba(0,0,0,0.5); /* 그림자를 더 진하게 */
+    --radius-chunky: 20px;
+    --radius-small: 8px;
+
+    /* 기존 변수 매핑 (구조 유지용) */
+    --dark-bg-color: var(--nerf-grey);
+    --dark-bg-card: var(--nerf-dark-grey); /* 컨테이너를 어둡게 */
+    --bg-primary: #111;
+    
+    --text-primary: var(--nerf-white); /* 텍스트는 밝게 */
+    --text-secondary: var(--nerf-orange);
+    --text-muted: #aaa;
+
+    --shadow-nerf-blue: none;
+    --shadow-nerf-green: none;
+    
+    /* Radius */
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+}
+
+html,
+body {
+    color: var(--text-primary);
+    /* background: var(--bg-primary); */
+    
+    /* 다크 카본 패턴 배경 */
+    background-image: 
+        linear-gradient(45deg, #1a1a1a 25%, transparent 25%, transparent 75%, #1a1a1a 75%, #1a1a1a),
+        linear-gradient(45deg, #1a1a1a 25%, transparent 25%, transparent 75%, #1a1a1a 75%, #1a1a1a);
+    background-color: #111;
+    background-position: 0 0, 20px 20px;
+    background-size: 40px 40px;
+}
+
+/* =========================================
+   [2] 메인 레이아웃 & 컨테이너
+   ========================================= */
+
+.event-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.event-box {
+    width: 100%;
+    max-width: 1200px;
+    
+    /* 다크 미션 크레이트 스타일 */
+    background-color: var(--nerf-dark-grey);
+    padding: 30px;
+    border-radius: var(--radius-xl);
+    
+    /* 두꺼운 오렌지/그레이 이중 테두리 */
+    border: 4px solid var(--nerf-grey);
+    border-top: 10px solid var(--nerf-orange); /* 상단 오렌지 포인트 */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    
+    /* 잔여 효과 제거 */
+    backdrop-filter: none;
+}
+
+/* 헤더 영역 */
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 3px dashed #444; /* 어두운 점선 구분선 */
+    margin-bottom: 20px;
+}
+
+.event-header h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--nerf-white);
+    text-shadow: 2px 2px 0 var(--nerf-blue); /* 파란색 그림자 포인트 */
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+/* 검색창 (Tactical Input) */
+.event-search {
+    width: 30%;
+    max-width: 600px;
+    padding: 10px 15px;
+    border: 3px solid var(--nerf-grey);
+    border-radius: var(--radius-md);
+    background: #333; /* 어두운 입력창 */
+    color: var(--nerf-white);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.event-search:focus {
+    outline: none;
+    border-color: var(--nerf-orange); /* 포커스 시 오렌지 */
+    background: #222;
+    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+/* =========================================
+   [3] 이벤트 리스트 & 아이템 (Ammo Clip Style)
+   ========================================= */
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    gap: 15px; /* 항목 간 간격 넓힘 */
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    
+    /* 탄창(Magazine) 스타일: 밝은 회색 바디 */
+    background: var(--nerf-white); 
+    padding: 10px 15px;
+    border-radius: 10px;
+    
+    /* 왼쪽 오렌지색 띠 */
+    border-left: 8px solid var(--nerf-orange);
+    border-right: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 4px solid #bbb; /* 입체감 */
+    
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.event-item:hover {
+    background: #fff;
+    transform: translateX(5px); /* 오른쪽으로 살짝 밀림 */
+    border-left-color: var(--nerf-blue); /* 호버 시 파란색으로 변경 */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.event-item span {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left; 
+    color: var(--nerf-grey); /* 텍스트는 진한 회색 */
+    flex-grow: 1;
+    padding-right: 20px;
+}
+
+.event-text {
+    flex: 1;
+    text-align: left;
+}
+
+/* =========================================
+   [4] 버튼 스타일 (Trigger Button)
+   ========================================= */
+
+/* 보상 버튼 */
+.reward-btn {
+    padding: 10px 25px;
+    border: 3px solid var(--nerf-dark-blue);
+    border-bottom-width: 6px; /* 두꺼운 입체 버튼 */
+    border-radius: 8px;
+    
+    background-color: var(--nerf-blue); /* 기본 파란색 */
+    color: var(--nerf-white);
+    
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+}
+
+.reward-btn:hover:not(.disabled) {
+    transform: translateY(3px); /* 눌리는 효과 */
+    border-bottom-width: 3px;
+    background-color: #0055aa;
+    box-shadow: none;
+}
+
+/* 완료된/비활성화 버튼 (방전된 배터리 느낌) */
+.reward-btn.disabled {
+    background-color: #333;
+    border-color: #222;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-bottom-width: 3px;
+    transform: translateY(3px); /* 이미 눌린 상태 */
+}
+
+/* =========================================
+   [5] 기타 설정
+   ========================================= */
+
+/* 테이블 헤더 색상 설정 (유지하되 색상 변경) */
+thead th:nth-child(6) { color: var(--nerf-yellow); }
+thead th:nth-child(7) { color: var(--nerf-green); }
+thead th:nth-child(8) { color: var(--nerf-blue); }
+thead th:nth-child(9) { color: var(--nerf-red); }

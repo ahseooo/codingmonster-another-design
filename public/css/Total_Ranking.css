@@ -1,0 +1,668 @@
+/* Total_Ranking.css - Nerf Blaster Edition (Structure Preserved) */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("./sub_frame.css");
+
+/* =========================================
+   [1] 너프건 테마 변수 (기존 변수명 맵핑)
+   ========================================= */
+:root {
+    /* --- 너프건 팔레트 --- */
+    --nerf-orange: #ff6b00;
+    --nerf-blue: #0066cc;
+    --nerf-green: #00CC00;
+    --nerf-red: #cc0000;
+    --nerf-grey: #2d3436;
+    --nerf-white: #ffffff;
+    --nerf-yellow: #ffd500;
+    --nerf-light-bg: #e0e0e0;
+
+    /* 배경색 */
+    --dark-bg-color: var(--nerf-grey);
+    --dark-bg-card: var(--nerf-white);
+    /* 카드는 흰색 플라스틱 */
+    --bg-primary: var(--nerf-light-bg);
+    /* 전체 배경은 밝은 회색 */
+
+    /* 텍스트 */
+    --text-primary: var(--nerf-grey);
+    /* 기본 텍스트는 진한 회색 */
+    --text-secondary: var(--nerf-blue);
+    --text-muted: #666666;
+    --text-white: var(--nerf-white);
+
+    /* 그림자 (Solid Shadow) */
+    --shadow-nerf-blue: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    --shadow-nerf-green: 4px 4px 0 rgba(0, 0, 0, 0.2);
+
+    /* Glass 효과 -> 플라스틱 효과 대체 */
+    --glass-bg: var(--nerf-white);
+    --glass-border: var(--nerf-grey);
+    --glass-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+
+    --accent-gold: var(--nerf-yellow);
+    --primary-gradient: none;
+    /* 그라데이션 제거 -> 단색 */
+
+    /* 레이아웃 변수 (유지) */
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    /* Chunky Radius */
+    --topbar-h: 60px;
+
+    /* 너프 전용 보더 설정 */
+    --plastic-border: 4px solid var(--nerf-grey);
+}
+
+html,
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    /* 너프건 바닥 패턴 */
+    background-image: repeating-linear-gradient(45deg,
+            #e0e0e0 0,
+            #e0e0e0 10px,
+            #d0d0d0 10px,
+            #d0d0d0 20px);
+    background-size: 100% 100%;
+}
+
+
+/* ========== 메인 섹션 ========== */
+.home-section {
+    position: relative;
+    left: 255px;
+    width: calc(100vw - 255px);
+    height: calc(100vh - var(--topbar-h));
+    transition: all 0.3s ease;
+    background: transparent;
+    /* 배경 패턴 노출 */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    gap: 20px;
+}
+
+/* 랭킹 컨테이너 */
+.ranking-container {
+    background: var(--nerf-white);
+    border-radius: var(--radius-xl);
+    padding: 20px;
+    box-shadow: var(--glass-shadow);
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: none;
+    /* 애니메이션 제거 */
+    color: var(--text-primary);
+    border: var(--plastic-border);
+    /* 두꺼운 테두리 */
+    overflow-y: visible;
+    margin: 0 auto;
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin: 2px 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--nerf-blue);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--nerf-orange);
+}
+
+
+/* --- 내 랭킹 카드 (Plastic Card) --- */
+.my-rank-card {
+    background: var(--nerf-blue);
+    /* 파란색 플라스틱 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: var(--plastic-border);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    color: var(--nerf-white);
+    position: relative;
+}
+
+/* 너프건 볼트 장식 추가 */
+.my-rank-card::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 12px;
+    height: 12px;
+    background: var(--nerf-orange);
+    border: 2px solid var(--nerf-grey);
+    border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+    .my-rank-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.character {
+    width: 60px;
+    height: 60px;
+    background: var(--nerf-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: none;
+    border: 3px solid var(--nerf-grey);
+    padding: 5px;
+}
+
+.character img {
+    width: 100%;
+    height: fit-content;
+}
+
+.profile-label {
+    font-size: 0.8rem;
+    color: var(--nerf-orange);
+    /* 주황색 */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: none;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--nerf-white);
+}
+
+.level-badge {
+    font-size: 0.8rem;
+    background: var(--nerf-orange);
+    color: var(--nerf-white);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    border: 2px solid var(--nerf-grey);
+    font-weight: 800;
+}
+
+.stats-section {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    /* 짙은 배경 유지 */
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    justify-content: space-around;
+    flex-grow: 1;
+    max-width: 600px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--nerf-green);
+    /* 녹색 텍스트 */
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    color: var(--nerf-white);
+}
+
+.stat-unit {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-left: 2px;
+    opacity: 0.8;
+}
+
+.stat-divider {
+    width: 2px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 1rem;
+}
+
+/* --- 테이블 (Tactical Table) --- */
+.table-container {
+    background: var(--nerf-light-bg);
+    border: var(--plastic-border);
+    border-radius: var(--radius-xl);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+/* 컬럼 너비 유지 */
+.ranking-table .col-rank {
+    width: 8%;
+}
+
+.ranking-table .col-nickname {
+    width: 26%;
+}
+
+.ranking-table .col-badges {
+    width: 24%;
+}
+
+.ranking-table .col-level {
+    width: 10%;
+}
+
+.ranking-table .col-tier {
+    width: 10%;
+}
+
+.ranking-table .col-exp {
+    width: 12%;
+}
+
+.ranking-table .col-score {
+    width: 10%;
+}
+
+.ranking-table th {
+    background: var(--nerf-grey);
+    /* 헤더 회색 */
+    color: var(--nerf-white);
+    padding: 12px;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 4px solid var(--nerf-orange);
+    /* 헤더 하단 주황색 포인트 */
+    overflow: hidden;
+    text-shadow: none;
+}
+
+.ranking-table th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.ranking-table th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.ranking-table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px dashed #bbb;
+    /* 점선 구분선 */
+    color: var(--nerf-grey);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ranking-table td.badges-cell {
+    text-align: left;
+}
+
+.ranking-table td.badges-cell .badges-container {
+    display: flex;
+    gap: 5px;
+}
+
+/* 테이블 하단 둥글게 */
+.ranking-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+}
+
+.ranking-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+.ranking-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 행 호버 효과 */
+.ranking-table tbody tr:hover td {
+    background: rgba(0, 102, 204, 0.1);
+    transform: translateX(3px);
+    transition: all 0.15s;
+}
+
+.ranking-table tbody tr:hover td:first-child {
+    box-shadow: inset 5px 0 0 0 var(--nerf-blue);
+    /* 왼쪽 파란 바 */
+}
+
+/* 내 랭킹 하이라이트 행 */
+.ranking-table tbody tr.my-rank-row td {
+    background: rgba(255, 213, 0, 0.2);
+    /* 연한 노랑 */
+    font-weight: 700;
+}
+
+.ranking-table tbody tr.my-rank-row:hover td {
+    background: rgba(255, 213, 0, 0.3);
+}
+
+.ranking-table tbody tr.my-rank-row td:first-child {
+    box-shadow: inset 5px 0 0 0 var(--nerf-orange);
+    /* 왼쪽 주황 바 */
+}
+
+.user-character {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #fff;
+    border: 2px solid var(--nerf-green);
+    flex-shrink: 0;
+}
+
+.nickname-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-start;
+    padding-left: 1rem;
+}
+
+.me-badge {
+    display: none;
+    background: var(--nerf-red);
+    color: var(--nerf-white);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.my-rank-row .me-badge {
+    display: inline-block;
+}
+
+.my-rank-row .user-nickname {
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--nerf-blue);
+}
+
+.rank-medal {
+    font-size: 36px;
+    color: var(--nerf-yellow);
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.2));
+}
+
+.rank-number {
+    font-weight: 900;
+    color: var(--nerf-grey);
+}
+
+.score-value {
+    font-weight: 900;
+    color: var(--nerf-orange);
+    text-shadow: none;
+}
+
+/* --- 페이지네이션 --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.pagination-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    border: 3px solid var(--nerf-blue);
+    border-bottom-width: 5px;
+    /* 입체 버튼 */
+    background: var(--nerf-white);
+    color: var(--nerf-blue);
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: var(--nerf-blue);
+    color: var(--nerf-white);
+    transform: translateY(2px);
+    border-bottom-width: 3px;
+    box-shadow: none;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    background: #ccc;
+    border-color: #999;
+    color: #666;
+    cursor: default;
+    transform: none;
+    border-bottom-width: 3px;
+}
+
+.page_number {
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--nerf-red);
+}
+
+/* 탭 메뉴 (Language Ranking에서 사용될 수 있음 - 구조 유지) */
+.tab-menu {
+    background: var(--nerf-white);
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 15px;
+    border-radius: var(--radius-xl);
+    max-width: 1400px;
+    border: var(--plastic-border);
+    box-shadow: var(--plastic-shadow);
+}
+
+.tab-btn {
+    padding: 10px 24px;
+    border-radius: 30px;
+    border: 3px solid var(--nerf-grey);
+    border-bottom-width: 5px;
+    /* 입체 버튼 */
+    background: var(--nerf-light-bg);
+    color: var(--nerf-grey);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: none;
+}
+
+.tab-btn i {
+    font-size: 1.1rem;
+    color: var(--nerf-blue);
+}
+
+/* 탭 호버 효과 */
+.tab-btn:hover {
+    background: var(--nerf-blue);
+    color: var(--nerf-white);
+    transform: translateY(2px);
+    border-bottom-width: 3px;
+    box-shadow: none;
+}
+
+.tab-btn:hover i {
+    color: var(--nerf-white);
+}
+
+/* 활성화된 탭 */
+.tab-btn.active {
+    background: var(--nerf-yellow);
+    color: var(--nerf-grey);
+    border-color: var(--nerf-orange);
+    box-shadow: none;
+    transform: scale(1.05);
+    border-bottom-width: 5px;
+}
+
+.tab-btn.active i {
+    color: var(--nerf-red);
+}
+
+/* 모바일 대응 (구조 유지) */
+@media (max-width: 768px) {
+    .tab-menu {
+        gap: 8px;
+    }
+
+    .tab-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+.tier-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* 티어 텍스트 및 아이콘 */
+.tier-icon {
+    font-size: 1.5rem;
+    filter: none;
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+/* 티어별 텍스트 색상 (선명하게) */
+.tier-diamond-text {
+    color: #0099cc;
+    text-shadow: none;
+    font-weight: 700;
+}
+
+.tier-platinum-text {
+    color: #555;
+    text-shadow: none;
+    font-weight: 700;
+}
+
+.tier-gold-text {
+    color: #cca300;
+    text-shadow: none;
+    font-weight: 700;
+}
+
+.tier-silver-text {
+    color: #888;
+    font-weight: 700;
+}
+
+.tier-bronze-text {
+    color: #a0522d;
+    font-weight: 700;
+}
+
+.badge-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: none;
+    display: block;
+    border-radius: 50%;
+    border: 1px solid var(--nerf-green);
+    background: #fff;
+    padding: 2px;
+    color: var(--nerf-green);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 반응형 숨김 처리 (구조 유지) */
+@media (max-width: 768px) {
+
+    .col-badges,
+    .badges-cell,
+    .col-exp,
+    .exp-cell {
+        display: none;
+    }
+}

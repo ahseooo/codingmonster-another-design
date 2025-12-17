@@ -1,0 +1,274 @@
+/* sign_up.css - Nerf Blaster Edition (Height Adjusted) */
+@import url(./main_frame.css);
+
+/* --- [1] 너프건 테마 변수 (일관성 유지) --- */
+:root {
+    --nerf-orange: #ff6b00;
+    --nerf-blue: #0066cc;
+    --nerf-grey: #2d3436;
+    --nerf-white: #ffffff;
+    --nerf-yellow: #ffd500;
+    
+    --plastic-border: 3px solid var(--nerf-grey);
+    --plastic-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
+    --radius-chunky: 16px;
+}
+
+/* 기본 설정 */
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 배경: 총기 보관함 느낌의 어두운 패턴 */
+body {
+    background-color: #333;
+    background-image: radial-gradient(circle, #444 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* [수정] 모달이 화면보다 클 경우 스크롤 가능하도록 변경 */
+    overflow: auto; 
+}
+
+/* 섹션 컨텐츠: 배경 투명화 */
+.section-contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    color: var(--nerf-grey);
+    /* [수정] 높이 고정 대신 최소 높이 설정 및 여백 추가 */
+    min-height: calc(100vh - 65px);
+    padding: 30px 0;
+    background: transparent;
+}
+
+/* --- [2] 회원가입 컨테이너 --- */
+.signup-container {
+    background-color: white;
+    width: 450px;
+    /* [수정] 패딩 축소 (30px -> 25px) */
+    padding: 25px; 
+    border-radius: var(--radius-chunky);
+    position: relative;
+    
+    /* 너프건 스타일 */
+    border: var(--plastic-border);
+    box-shadow: var(--plastic-shadow);
+    color: var(--nerf-grey);
+}
+
+/* 모서리 볼트 장식 */
+.signup-container::after {
+    content: ''; position: absolute; top: 12px; right: 12px;
+    width: 12px; height: 12px;
+    background: #ddd; border-radius: 50%;
+    border: 1px solid #999;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* 헤더 */
+.signup-container h2 {
+    background: var(--nerf-grey);
+    color: white;
+    /* [수정] 마진/패딩 축소하여 상단 공간 절약 */
+    margin: -25px -25px 20px -25px; 
+    padding: 15px; 
+    border-radius: 12px 12px 0 0;
+    border-bottom: 3px solid #000;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 22px; /* 폰트 사이즈 살짝 축소 */
+    text-align: center;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(0,0,0,0.2) 10px,
+        rgba(0,0,0,0.2) 20px
+    );
+}
+
+/* --- [3] 입력창 (Input) --- */
+.signup-container input[type="text"],
+.signup-container input[type="email"],
+.signup-container input[type="password"] {
+    width: 100%;
+    /* [수정] 높이 축소 (45px -> 40px) */
+    height: 40px; 
+    padding: 0 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--nerf-grey);
+    transition: all 0.2s;
+    outline: none;
+}
+
+/* 포커스 효과 */
+.signup-container input:focus {
+    border-color: var(--nerf-blue);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* 입력 그룹 */
+.signup-container .wrap {
+    display: flex;
+    justify-content: space-between;
+    /* [수정] 마진 축소 (15px -> 12px) */
+    margin-bottom: 12px; 
+    gap: 8px;
+}
+
+.signup-container .wrap input {
+    flex: 1;
+    width: auto;
+}
+
+.signup-container .text, .signup-container .wrap02 {
+    /* [수정] 마진 축소 */
+    margin-bottom: 12px; 
+}
+.signup-container .text input {
+    margin-bottom: 8px; /* [수정] 인풋 간 간격 축소 */
+}
+
+/* --- [4] 버튼 스타일링 --- */
+
+/* (1) 작은 액션 버튼 */
+.signup-container .send-btn {
+    width: 90px;
+    /* [수정] 높이 인풋과 맞춤 (40px) */
+    height: 40px; 
+    padding: 0;
+    background-color: var(--nerf-orange);
+    color: white;
+    border: 2px solid #cc5500;
+    border-bottom-width: 4px; /* 입체감 */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    margin: 0;
+    transition: all 0.1s;
+}
+
+.signup-container .send-btn:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    background-color: #ff7733;
+}
+
+/* (2) 이메일 인증 버튼 */
+.signup-container .verify-btn {
+    width: 100%;
+    /* [수정] 높이 축소 (45px -> 40px) */
+    height: 40px; 
+    background-color: white;
+    color: var(--nerf-blue);
+    border: 2px solid var(--nerf-blue);
+    border-bottom-width: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    transition: all 0.1s;
+}
+
+.signup-container .verify-btn:hover {
+    background-color: #f0f7ff;
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+/* (3) 회원가입 완료 버튼 */
+.signup-container button.join-btn {
+    width: 100%;
+    /* [수정] 마진 및 패딩 축소 */
+    margin-top: 15px; 
+    padding: 12px; 
+    background-color: var(--nerf-blue);
+    color: white;
+    border: 2px solid #004499;
+    border-bottom-width: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px; /* 폰트 사이즈 조정 */
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.1s;
+    opacity: 1;
+}
+
+.signup-container button.join-btn:hover {
+    background-color: #0055dd;
+    transform: translateY(3px);
+    border-bottom-width: 2px;
+}
+
+/* 타이머 텍스트 */
+.timer {
+    padding: 3px 5px; /* 패딩 축소 */
+    font-size: 12px;
+    color: #e74c3c;
+    text-align: right;
+    font-weight: 700;
+}
+
+/* --- [5] 약관 동의 박스 --- */
+.signup-container .service-policy {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: #f1f2f6;
+    /* [수정] 패딩 축소 */
+    padding: 12px; 
+    border-radius: 12px;
+    border: 2px dashed #ccc;
+    font-size: 13px; /* 폰트 사이즈 축소 */
+    margin-top: 8px;
+}
+
+.signup-container .service-policy ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.signup-container .service-policy ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0; /* 마진 축소 */
+    color: var(--nerf-grey);
+    font-weight: 600;
+}
+
+.signup-container .service-policy ul li:first-child {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: var(--nerf-blue);
+}
+
+.signup-container .service-policy li label {
+    flex: 1;
+    cursor: pointer;
+}
+
+/* 체크박스 커스텀 */
+.signup-container .service-policy ul li input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--nerf-blue);
+    cursor: pointer;
+}

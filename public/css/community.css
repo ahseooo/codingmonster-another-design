@@ -1,0 +1,639 @@
+/* community.css - Nerf Blaster Edition (Structure Preserved & Header Fixed) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("./sub_frame.css");
+
+/* =========================================
+   [1] 너프건 테마 변수 (구조 유지를 위한 변수 매핑)
+   ========================================= */
+:root {
+    /* --- 너프건 팔레트 --- */
+    --nerf-orange: #ff6b00;
+    --nerf-blue: #0066cc;
+    --nerf-green: #00CC00;
+    --nerf-red: #cc0000;
+    --nerf-grey: #2d3436;
+    --nerf-white: #ffffff;
+    --nerf-yellow: #ffd500;
+    --nerf-light-bg: #e0e0e0;
+
+    /* --- 기존 변수 재정의 (구조 유지 핵심) --- */
+    /* [핵심 수정] 헤더는 어둡게 유지, 카드는 밝게 변경 */
+    --dark-bg-color: var(--nerf-grey); /* 헤더 배경 (진한 회색) */
+    --dark-bg-card: var(--nerf-white); /* 게시판 박스 배경 (흰색) */
+    --bg-primary: var(--nerf-light-bg); /* 전체 배경 (밝은 회색) */
+    
+    /* 텍스트 색상 */
+    --text-primary: var(--nerf-grey);
+    --text-secondary: var(--nerf-blue);
+    --text-muted: #666;
+    
+    
+    /* 보조 배경 */
+    --bg-secondary: #f4f4f4; /* 댓글/입력창 배경 (연회색) */
+    --bg-tertiary: #e8e8e8; /* 답글 배경 (조금 진한 연회색) */
+
+    /* 테두리 및 그림자 (플라스틱 질감) */
+    --border-nerf-blue: 4px solid var(--nerf-grey);
+    --border-nerf-green: 4px solid var(--nerf-grey);
+    --shadow-nerf-blue: 4px 4px 0 rgba(0,0,0,0.1); 
+    --shadow-nerf-green: 4px 4px 0 rgba(0,0,0,0.1);
+
+    /* 기존 레이아웃 변수 유지 */
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px; /* Chunky Radius */
+    
+    /* 너프 전용 */
+    --plastic-border: 4px solid var(--nerf-grey);
+    --plastic-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+}
+
+html,
+body {
+    color: var(--text-primary);
+    background-color: var(--nerf-light-bg);
+    
+    /* 배경: 전술 작전 지도 (Tactical Grid) 패턴 */
+    /* 얇은 회색 선이 교차하는 격자 무늬 */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px; /* 격자 크기 (시원하게 넓힘) */
+    background-position: center top;
+}
+
+/* ==========================================================================
+   3. 공통 컴포넌트 (Common Components)
+   ========================================================================== */
+
+/* --- 메인 컨테이너 (Glass -> Plastic Board) --- */
+.board,
+#writeSection,
+#postDetailSection {
+    /* Glassmorphism 제거 -> 플라스틱 보드 적용 */
+    background: var(--dark-bg-card); 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: var(--radius-xl);
+    border: var(--plastic-border);
+    box-shadow: var(--plastic-shadow);
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* margin-bottom: 20px; */
+}
+
+/* 컨테이너별 스타일 유지 */
+.board {
+    display: flex;
+    flex-direction: column;
+    padding: 30px; /* 여백 약간 확보 */
+}
+
+#writeSection,
+#postDetailSection {
+    display: none;
+    background: var(--dark-bg-card);
+    padding: 30px;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    margin-top: 20px;
+    /* 상세 페이지 상단 포인트 */
+    border-top: 10px solid var(--nerf-blue);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 버튼 시스템 (Button System) --- */
+/* 공통 기본 스타일 */
+.write-btn,
+.submit-btn,
+.delete-btn,
+.close-btn,
+#addCommentBtn,
+.reply-btn,
+.delete-comment-btn,
+.submit-reply-btn {
+    background: var(--nerf-white);
+    color: var(--nerf-grey);
+    border: 2px solid var(--nerf-grey);
+    border-bottom-width: 4px; /* 입체감 */
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.1s; /* 빠릿한 반응 */
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* 호버 효과 (눌리는 느낌) */
+.write-btn:hover,
+.submit-btn:hover,
+.delete-btn:hover,
+#addCommentBtn:hover,
+.reply-btn:hover,
+.delete-comment-btn:hover,
+.submit-reply-btn:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    box-shadow: none;
+}
+
+/* 클릭 효과 */
+.write-btn:active,
+.submit-btn:active,
+.delete-btn:active,
+#addCommentBtn:active {
+    transform: translateY(4px);
+    border-bottom-width: 0px;
+}
+
+/* 1. 중요 버튼 (글쓰기, 작성 등 - 오렌지) */
+.write-btn, .submit-btn, #addCommentBtn {
+    background: var(--nerf-orange);
+    color: var(--nerf-white);
+    border-color: #cc5500;
+}
+.write-btn:hover, .submit-btn:hover, #addCommentBtn:hover {
+    background: #ff7733;
+}
+
+/* 2. 삭제 버튼 (빨강) */
+.delete-btn {
+    background: var(--nerf-red);
+    color: var(--nerf-white);
+    border-color: #990000;
+    box-shadow: none;
+}
+.delete-btn:hover {
+    background: #ff3333;
+}
+
+/* 3. 작은 버튼 (댓글, 답글 - 흰색) */
+.delete-btn.small,
+.reply-btn,
+.delete-comment-btn,
+.submit-reply-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    background: var(--nerf-white);
+    color: var(--nerf-grey);
+}
+.reply-btn:hover, .delete-comment-btn:hover, .submit-reply-btn:hover {
+    background: #eee;
+}
+
+/* 4. 닫기 버튼 (원형) */
+.close-btn {
+    width: 36px; height: 36px; padding: 0;
+    font-size: 18px;
+    border-radius: 50%;
+    background: var(--nerf-white);
+    color: var(--nerf-grey);
+    border: 3px solid var(--nerf-grey);
+    box-shadow: none;
+}
+.close-btn:hover {
+    background: var(--nerf-red);
+    color: white;
+    border-color: #990000;
+    transform: rotate(90deg);
+}
+
+/* --- 입력 폼 (Inputs - Recessed Look) --- */
+textarea,
+.title-input,
+.content-input,
+#commentInput {
+    width: 100%;
+    padding: 16px;
+    border: 3px solid #ccc;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: var(--bg-secondary); /* 움푹 들어간 느낌 */
+    color: var(--nerf-grey);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+textarea:focus,
+.title-input:focus,
+.content-input:focus,
+#commentInput:focus {
+    outline: none;
+    border-color: var(--nerf-blue);
+    background: var(--nerf-white);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* ==========================================================================
+   4. 페이지별 상세 스타일 (Specifics)
+   ========================================================================== */
+
+/* --- 메인 게시판 (Board) --- */
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 4px solid var(--nerf-grey); /* 굵은 회색 구분선 */
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.board-header h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--nerf-grey);
+    text-shadow: none;
+    letter-spacing: -0.5px;
+    /* 포인트 */
+    border-left: 8px solid var(--nerf-yellow);
+    padding-left: 15px;
+}
+
+/* 테이블 스타일 */
+.board-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    table-layout: fixed;
+    border: none;
+}
+
+.board-table thead th {
+    color: var(--nerf-white);
+    background: var(--nerf-grey); /* 헤더는 진한 회색 */
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 15px;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+}
+
+.board-table th:nth-child(1) { width: 8%; }
+.board-table th:nth-child(2) { width: 40%; }
+.board-table th:nth-child(3) { width: 15%; }
+.board-table th:nth-child(4) { width: 25%; }
+.board-table th:nth-child(5) { width: 12%; }
+
+/* 헤더 둥글게 */
+.board-table th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+.board-table th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+/* 행 스타일 */
+.board-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.board-table tbody td {
+    background: #f4f4f4;
+    padding: 18px 10px;
+    text-align: center;
+    color: var(--nerf-grey);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* 상하 테두리 연결 */
+    border-top: 2px solid #ccc;
+    border-bottom: 4px solid #bbb; /* 바닥 입체감 */
+    
+    /* 좌우 테두리는 일단 제거 */
+    border-left: none;
+    border-right: none;
+}
+
+/* 행 양끝 둥글게 */
+.board-table tbody td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+    /* 왼쪽 포인트 띠 (테두리로 표현) */
+    border-left: 8px solid var(--nerf-blue); 
+    
+    /* 포인트 띠와 상하 테두리가 자연스럽게 만나는 지점 */
+    color: var(--nerf-blue); 
+    font-weight: 900;
+}
+
+.board-table tbody td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    
+    /* 오른쪽 마감 테두리 */
+    border-right: 2px solid #ccc;
+}
+
+/* --- 호버 효과 --- */
+.board-table tbody tr:hover td {
+    background: var(--nerf-white);
+    transform: translateY(-3px);
+    border-top-color: var(--nerf-blue);
+    border-bottom-color: var(--nerf-blue);
+    color: var(--nerf-grey);
+    cursor: pointer;
+}
+
+/* 호버 시 왼쪽 띠 색상 변경 */
+.board-table tbody tr:hover td:first-child {
+    border-left-color: var(--nerf-orange);
+    color: var(--nerf-orange);
+}
+
+/* 호버 시 오른쪽 마감 테두리 색상 변경 */
+.board-table tbody tr:hover td:last-child {
+    border-right-color: var(--nerf-blue);
+}
+
+.board-table .post-title {
+    color: var(--nerf-grey);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.board-table .post-title:hover {
+    color: var(--nerf-orange);
+    text-decoration: none;
+}
+
+/* 페이지네이션 */
+.pagination {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pagination button {
+    background: var(--nerf-white);
+    border: 2px solid var(--nerf-grey);
+    border-bottom-width: 4px;
+    color: var(--nerf-grey);
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 40px;
+    height: 40px;
+    box-shadow: none;
+}
+
+.pagination button:hover {
+    background: var(--nerf-yellow);
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.pagination button.active {
+    background: var(--nerf-blue);
+    color: var(--nerf-white);
+    border-color: #004499;
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+/* --- 글쓰기 섹션 (Write Section) --- */
+.write-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.title-input {
+    flex: 1;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.content-input {
+    min-height: 400px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+}
+
+/* --- 게시글 상세 (Detail Section) --- */
+#postDetailSection>div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 3px dashed #ccc; /* 절취선 느낌 */
+}
+
+#postDetailSection>div:first-child>div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#detailTitle {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--nerf-grey);
+    text-shadow: none;
+    line-height: 1.3;
+    word-break: break-all;
+}
+
+#detailContent {
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.8;
+    min-height: 200px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#detailInfo {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--nerf-yellow); /* 노란색 정보 박스 */
+    border-radius: var(--radius-md);
+    border: 2px solid var(--nerf-grey);
+    color: var(--nerf-grey);
+    font-weight: 700;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+}
+
+/* --- 댓글 섹션 (Comment Section) --- */
+#commentSection {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 4px solid var(--nerf-grey);
+}
+
+#commentInput {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.comment-submit-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+#commentList {
+    margin-top: 30px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#commentList li {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #ddd;
+    border-left: 6px solid var(--nerf-blue); /* 왼쪽 파란색 포인트 */
+    transition: all 0.2s ease;
+}
+
+#commentList li:hover {
+    border-color: var(--nerf-blue);
+    background: white;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+}
+
+#commentList strong {
+    color: var(--nerf-blue);
+    font-size: 15px;
+    font-weight: 800;
+    text-shadow: none;
+}
+
+#commentList small {
+    color: #888;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+#commentList p {
+    margin-top: 10px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+/* 답글 UI */
+[id^="replyInput-"] {
+    margin-top: 12px;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 2px dashed #bbb;
+}
+
+[id^="replyText-"] {
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+[id^="replies-"]>div {
+    margin-left: 24px;
+    margin-top: 12px;
+    padding: 16px;
+    background: #f0f0f0;
+    border-radius: var(--radius-md);
+    border: 2px solid #ddd;
+    border-left: 6px solid var(--nerf-orange); /* 답글은 오렌지 */
+}
+
+[id^="replies-"] strong {
+    font-size: 14px;
+    color: var(--nerf-orange);
+}
+
+[id^="replies-"] p {
+    margin-top: 8px;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+/* 전체 스크롤바 너비 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* 스크롤바 트랙 */
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 10px;
+}
+
+/* 스크롤바 핸들 */
+::-webkit-scrollbar-thumb {
+    background: var(--nerf-blue);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--nerf-orange);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* 수정 버튼 (오렌지색 재정의) */
+#editPostBtn {
+    background: var(--nerf-orange); 
+    color: var(--nerf-white);
+    border-color: #cc5500;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+#editPostBtn:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    box-shadow: none;
+    background: #ff7733;
+}
+
+#editPostBtn:active {
+    transform: translateY(4px);
+    border-bottom-width: 0;
+}

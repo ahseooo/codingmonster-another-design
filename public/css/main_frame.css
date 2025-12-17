@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap");
+/* Play_on, Play_off, sign_in, sign_up 페이지 헤더 */
+/* --- 너프건 테마를 위한 CSS 변수 설정 --- */
+:root {
+    --nerf-blue: #007bff; /* 밝은 파랑 */
+    --nerf-orange: #FF8C00; /* 밝은 주황 */
+    --nerf-grey: #95a5a6;
+    --nerf-bg: #F0F0F0; /* 밝은 배경색 */
+    --nerf-text: #1c1c1c; /* 어두운 텍스트색 */
+    --nerf-border-thick: 3px solid;
+    --nerf-radius-soft: 8px;
+    --nerf-shadow: 0 4px 0 rgba(0, 0, 0, 0.4); /* 기본 버튼 그림자 */
+    --nerf-shadow-blue: 0 4px 0 var(--nerf-blue);
+    --nerf-shadow-orange: 0 4px 0 var(--nerf-orange);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    /* 모든 요소에 부드러운 곡선 적용 */
+    border-radius: var(--nerf-radius-soft); 
+    /* 폰트 설정 */
+    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+    transition: all 0.2s ease-out;
+    /* box-sizing: border-box; */
+}
+
+body {
+    color: var(--nerf-text); /* body의 기본 텍스트 색상은 어둡게 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+/* ========== 헤더 ========== */
+header {
+    background: var(--nerf-bg);
+    backdrop-filter: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    border-bottom: var(--nerf-border-thick) var(--nerf-orange); /* 주황색 두꺼운 라인 */
+    padding: 10px 30px;
+    position: sticky;
+    top: 0;
+    height: 65px;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-container h1 {
+    /* 로고 스타일: 주황색 강조 */
+    background: none;
+    -webkit-background-clip: unset; 
+    -webkit-text-fill-color: var(--nerf-orange);
+    background-clip: unset;
+    color: var(--nerf-orange);
+    /* 3D 텍스트 효과 */
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5); 
+    font-size: 30px;
+    font-weight: 900; 
+}
+
+.header-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+nav ul {
+    display: flex;
+    gap: 15px;
+}
+
+nav button.nav_button {
+    background: var(--nerf-bg);
+    border: var(--nerf-border-thick) var(--nerf-blue);
+    padding: 8px 16px;
+    border-radius: var(--nerf-radius-soft);
+    color: var(--nerf-blue);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--nerf-shadow-blue);
+    transition: all 0.1s ease-out;
+    white-space: nowrap;
+}
+
+nav button.nav_button:hover {
+    /* 호버 시 버튼 눌림 효과 (파란색 배경, 어두운 텍스트) */
+    background: var(--nerf-blue); 
+    color: var(--nerf-bg); 
+    transform: translateY(4px); /* 4px 이동 = 그림자 두께 */
+    box-shadow: 0 0 0 var(--nerf-blue); /* 그림자 제거 */
+    border-bottom-width: 3px;
+}
+
+/* 로그인/회원가입 버튼 (강조색: 주황) */
+nav button#btn_login,
+nav button#btn_register { 
+    background: var(--nerf-bg);
+    border: var(--nerf-border-thick) var(--nerf-orange);
+    color: var(--nerf-orange);
+    box-shadow: var(--nerf-shadow-orange); /* 주황 3D 그림자 */
+    padding: 8px 16px; 
+}
+
+nav button#btn_login:hover,
+nav button#btn_register:hover {
+    background: var(--nerf-orange);
+    color: var(--nerf-bg);
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--nerf-orange);
+}
+
+/* 로그아웃 버튼 (어두운 배경/텍스트) */
+nav button#btn_logout {
+    border: var(--nerf-border-thick) var(--nerf-text);
+    color: var(--nerf-text);
+    background: var(--nerf-bg);
+    box-shadow: 0 4px 0 var(--nerf-text);
+    padding: 8px 16px; 
+    
+}
+
+nav button#btn_logout:hover {
+    background: var(--nerf-text);
+    color: var(--nerf-bg);
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--nerf-text);
+}

@@ -1,0 +1,580 @@
+/* sign_in.css - Nerf Blaster Edition */
+@import url(./main_frame.css);
+
+/* --- [1] 너프건 테마 변수 (Play 페이지와 동일하게 유지) --- */
+:root {
+    --nerf-orange: #ff6b00;
+    --nerf-blue: #0066cc;
+    --nerf-grey: #2d3436;
+    --nerf-white: #ffffff;
+    --nerf-yellow: #ffd500;
+    
+    --plastic-border: 3px solid var(--nerf-grey);
+    --plastic-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
+    --radius-chunky: 16px;
+}
+
+*:not(.google-wrap *) {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 배경: 총기 보관함 느낌의 어두운 패턴 */
+body {
+    background-color: #333;
+    background-image: radial-gradient(circle, #444 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow: hidden;
+}
+
+/* 섹션 컨텐츠: 배경 투명화 (Body 배경 보이게) */
+.section-contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    color: var(--nerf-grey);
+    width: 100%;
+    height: calc(100vh - 65px);
+    background: transparent; 
+}
+
+/* --- [2] 로그인 컨테이너: 플라스틱 모듈 케이스 --- */
+.signin-container {
+    background-color: white;
+    color: var(--nerf-grey);
+    padding: 30px;
+    border-radius: var(--radius-chunky);
+    width: 400px; /* 너비 살짝 키움 */
+    position: relative;
+    /* 너프건 스타일 테두리와 그림자 */
+    border: var(--plastic-border);
+    box-shadow: var(--plastic-shadow);
+}
+
+/* 모서리 볼트(Bolt) 장식 */
+.signin-container::after {
+    content: ''; position: absolute; top: 12px; right: 12px;
+    width: 12px; height: 12px;
+    background: #ddd; border-radius: 50%;
+    border: 1px solid #999;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* 헤더 (Login): 택티컬 레일 스타일 */
+.signin-container h2 {
+    background: var(--nerf-grey);
+    color: white;
+    margin: -30px -30px 25px -30px; /* 카드 상단 꽉 채우기 */
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 3px solid #000;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 24px;
+    text-align: center;
+    /* 빗살무늬 패턴 */
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(0,0,0,0.2) 10px,
+        rgba(0,0,0,0.2) 20px
+    );
+}
+
+/* --- [3] 입력창 (Input): 데이터 슬롯 --- */
+.signin-container input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--nerf-grey);
+    transition: all 0.2s;
+}
+
+.signin-container input:focus {
+    outline: none;
+    border-color: var(--nerf-blue);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* --- [4] 로그인 버튼: 파란색 트리거 --- */
+.signin-container button#login_btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--nerf-blue);
+    color: white;
+    border: 2px solid #004499;
+    border-bottom: 4px solid #003388; /* 입체감 */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 10px 0 20px 0;
+    opacity: 1; /* 기존 투명도 제거 */
+    transition: all 0.1s;
+}
+
+.signin-container button#login_btn:hover {
+    transform: translateY(2px); /* 눌리는 효과 */
+    border-bottom-width: 2px;
+    background-color: #0055dd;
+}
+
+/* 링크 텍스트 */
+.login-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.login-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.forgot-link {
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-link:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+.signin-container a {
+    color: var(--nerf-grey);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.signin-container a:hover {
+    color: var(--nerf-orange);
+    text-decoration: none;
+}
+
+.signin-container p {
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0 10px 0;
+    font-weight: 500;
+    color: #666;
+}
+
+/* 1. 레이아웃 영역 */
+.social-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 2px dashed #ddd; /* 절취선 느낌 */
+}
+
+/* 2. [핵심] 모든 소셜 버튼을 '물리 버튼'으로 통합 설정 */
+.google-wrap,
+#naverIdLogin,
+.social-login .kakao img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px; /* 둥글지만 단단한 모서리 */
+    cursor: pointer;
+    transition: all 0.1s;
+    
+    /* 너프건 스타일: 입체적인 테두리 (Solid Border) */
+    border-style: solid;
+    border-width: 2px; 
+    border-bottom-width: 5px; /* 아래쪽을 두껍게 해서 높이감 표현 */
+    
+    /* 내부 정렬 및 박스 모델 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 내부 이미지가 튀어나오지 않게 */
+    
+    /* 기존 그림자 제거 (테두리로 입체감 표현하므로) */
+    box-shadow: none; 
+    margin: 0;
+}
+
+/* 3. [개별 색상] 구글 (화이트/그레이) */
+.google-wrap {
+    background: white;
+    border-color: #ccc;        /* 테두리: 회색 */
+    border-bottom-color: #999; /* 그림자 부분: 진한 회색 */
+}
+
+/* 4. [개별 색상] 네이버 (그린) */
+#naverIdLogin {
+    background: #03c75a; 
+    border-color: #03c75a;
+    border-bottom-color: #028f41; /* 더 진한 초록색 */
+}
+/* 네이버 이미지 꽉 채우기 (필수) */
+#naverIdLogin a, #naverIdLogin img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+    margin: 0; padding: 0;
+}
+
+/* 5. [개별 색상] 카카오 (옐로우) */
+.social-login .kakao img {
+    background: #fee500;
+    border-color: #fee500;
+    border-bottom-color: #dcb500; /* 진한 노란색/갈색톤 */
+    object-fit: contain; /* 카카오 로고 비율 유지 */
+}
+
+/* 6. [동작] 호버 시 '딸깍' 눌리는 효과 */
+.google-wrap:hover,
+#naverIdLogin:hover,
+.social-login .kakao img:hover {
+    transform: translateY(3px); /* 3px 만큼 눌림 */
+    border-bottom-width: 2px;   /* 두꺼운 아랫면이 줄어듦 */
+    filter: brightness(0.95);   /* 살짝 어둡게 반응 */
+    box-shadow: none;           /* 그림자 제거 */
+}
+
+/* --- [5] 모달 (Modal): 전술 패널 팝업 --- */
+.nickname-modal, .find-modal-overlay {
+    background: rgba(0, 0, 0, 0.7); /* 어두운 배경 */
+    backdrop-filter: none;
+}
+
+.nickname-modal-content, .reset-modal-content {
+    background: white;
+    border: var(--plastic-border);
+    border-radius: var(--radius-chunky);
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    color: var(--nerf-grey);
+}
+
+/* 모달 헤더 */
+.nickname-modal-content h2, .reset-modal-content h2 {
+    color: var(--nerf-orange);
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #eee;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.nickname-modal-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 닉네임 입력 그룹 */
+.nickname-input-group {
+    display: flex; gap: 10px; margin-bottom: 15px;
+}
+
+.nickname-input-group input {
+    background: #f9f9f9;
+    border: 2px solid #ccc;
+    color: var(--nerf-grey);
+    border-radius: 8px;
+}
+
+.nickname-input-group input:focus {
+    border-color: var(--nerf-orange);
+    box-shadow: none;
+}
+
+/* 중복확인 버튼 (작은 주황 트리거) */
+.nickname-input-group button {
+    background: var(--nerf-orange);
+    border: 2px solid #cc5500;
+    border-bottom-width: 4px;
+    color: white;
+    font-weight: 800;
+    border-radius: 8px;
+}
+
+.nickname-input-group button:hover {
+    background: #ff7733;
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    box-shadow: none;
+}
+
+/* 모달 하단 버튼 (완료/변경 등) */
+.nickname-modal-buttons button, .reset-btn {
+    width: 100%;
+    background: var(--nerf-blue);
+    color: white;
+    border: 2px solid #004499;
+    border-bottom-width: 4px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.nickname-modal-buttons button:hover, .reset-btn:hover {
+    background: #0055dd;
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    box-shadow: none;
+}
+
+.nickname-modal-buttons button:disabled, .reset-btn:disabled {
+    background: #ddd;
+    color: #999;
+    border-color: #bbb;
+    border-bottom-width: 2px;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 비밀번호 찾기 인풋 */
+.reset-input {
+    border: 2px solid #ccc;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+.reset-input:focus {
+    border-color: var(--nerf-blue);
+    outline: none;
+}
+
+/* 닫기 버튼 */
+.close-modal-btn {
+    color: #ccc;
+    font-size: 28px;
+    top: 10px; right: 15px;
+}
+.close-modal-btn:hover {
+    color: var(--nerf-orange);
+}
+
+.reset-btn-secondary {
+    background: #6c757d;
+    border-color: #545b62;
+    border-bottom-color: #4e555b;
+}
+.reset-btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* 메시지 알림 모달 */
+#messageModal .reset-modal-content {
+    border-top: 6px solid var(--nerf-blue);
+}
+#messageModal h3 {
+    color: var(--nerf-blue);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.find-modal-overlay {
+    display: none; /* JS에서 flex로 변경됨 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 배경 어둡게 */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* 최상단 */
+}
+
+/* 2. 모달 본문 (Content) - 전술 패널 디자인 */
+.reset-modal-content {
+    background: white;
+    /* 너프건 스타일: 두꺼운 테두리와 그림자 */
+    border: var(--plastic-border);
+    border-radius: var(--radius-chunky);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    padding: 30px; /* 여백 조정 */
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+    color: var(--nerf-grey);
+}
+
+/* 헤더 스타일 */
+.reset-modal-content h2 {
+    color: var(--nerf-orange);
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-bottom: 3px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* 단계별 컨테이너 */
+.reset-step {
+    display: none;
+}
+.reset-step.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 입력 그룹 */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--nerf-grey);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* 입력창 (데이터 슬롯 스타일) */
+.reset-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f9f9f9;
+    color: var(--nerf-grey);
+    font-weight: 600;
+    box-sizing: border-box;
+}
+
+.reset-input:focus {
+    outline: none;
+    border-color: var(--nerf-blue);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* 버튼 (파란색 트리거) */
+.reset-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--nerf-blue);
+    color: white;
+    border: 2px solid #004499;
+    border-bottom-width: 4px; /* 입체감 */
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.1s;
+}
+
+.reset-btn:hover {
+    background: #0055dd;
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.reset-btn:disabled {
+    background: #ddd;
+    color: #999;
+    border-color: #bbb;
+    border-bottom-width: 2px;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 보조 버튼 (회색) */
+.reset-btn-secondary {
+    background: #6c757d;
+    border-color: #545b62;
+    border-bottom-color: #4e555b;
+}
+
+.reset-btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* 메시지 박스 */
+.reset-message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.reset-message.success {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.reset-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* 타이머 */
+.timer {
+    font-size: 14px;
+    color: #e74c3c; /* 경고 레드 */
+    margin-top: 5px;
+    text-align: right;
+    font-weight: 800;
+}
+
+/* 닫기 버튼 (X) */
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: var(--nerf-orange);
+}

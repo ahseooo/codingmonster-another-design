@@ -1,0 +1,603 @@
+/* Service.css - Nerf Blaster Edition (Framed Manual Style) */
+/* ============================================
+   고객센터 모달 - 정비 매뉴얼 스타일
+   ============================================ */
+
+/* 변수 가져오기 (Setting.css와 연동) */
+:root {
+    --nerf-orange: #ff6b00;
+    --nerf-blue: #0066cc;
+    --nerf-green: #00CC00;
+    --nerf-red: #cc0000;
+    --nerf-grey: #2d3436;
+    --nerf-white: #ffffff;
+    --nerf-light-bg: #e0e0e0;
+    --plastic-border: 4px solid var(--nerf-grey);
+    --radius-chunky: 20px;
+    --radius-md: 8px;
+
+    /* 텍스트 */
+    --text-primary: var(--nerf-grey);
+    --text-secondary: var(--nerf-blue);
+    --text-muted: #666;
+}
+
+/* 모달 오버레이 (배경 어둡게 처리) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* 배경을 더 어둡게 */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+    /* 블러 효과 추가 */
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+/* 모달 컨테이너 (진한 회색 프레임) */
+.settings-modal {
+    /* [핵심] 배경을 진한 회색으로 변경하여 프레임 역할 */
+    background: var(--nerf-grey);
+
+    border-radius: var(--radius-chunky);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    /* 그림자 더 진하게 */
+    border: 4px solid var(--nerf-white);
+    /* 흰색 테두리로 구분 */
+
+    /* 상단 장식 (너프 오렌지 포인트) */
+    border-top: 10px solid var(--nerf-orange);
+
+    width: 90%;
+    max-width: 800px;
+    height: 85vh;
+    max-height: 700px;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 모달 헤더 (어두운 배경 + 흰색 글씨) */
+.service-title {
+    background: transparent;
+    /* 컨테이너 배경(회색) 사용 */
+    padding: 20px 30px;
+    color: var(--nerf-white);
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-bottom: none;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.service-title::before {
+    content: "\f0ad";
+    font-family: "Font Awesome 6 Free";
+    color: var(--nerf-orange);
+}
+
+/* 닫기 버튼 (흰색 아이콘) */
+.close-service-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--nerf-white);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.close-service-btn:hover {
+    background: var(--nerf-red);
+    border-color: var(--nerf-red);
+    transform: rotate(90deg);
+}
+
+/* 메인 콘텐츠 (흰색 종이 영역) */
+.main-content {
+    /* [핵심] 내부를 흰색 카드로 만들어 배경과 분리 */
+    background: var(--nerf-white);
+    margin: 0 10px 10px 10px;
+    /* 프레임 안쪽 여백 */
+    border-radius: 12px;
+    padding: 30px;
+
+    flex: 1;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--text-primary);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 안쪽 그림자 */
+}
+
+/* 문의 영역 (알림 박스) */
+.inquiry-area {
+    background: #eef6fc;
+    /* 아주 연한 파랑 */
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid var(--nerf-blue);
+    flex-shrink: 0;
+}
+
+.inquiry-area p {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--nerf-blue);
+    margin: 0;
+}
+
+/* 공통 버튼 스타일 */
+.inquiry-button {
+    background: var(--nerf-green);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 4px solid #009900;
+    /* 입체 버튼 */
+}
+
+.inquiry-button:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    background: #00b300;
+}
+
+.inquiry-button.cancel {
+    background: var(--nerf-white);
+    color: var(--nerf-grey);
+    border: 2px solid var(--nerf-grey);
+    border-bottom-width: 4px;
+}
+
+.inquiry-button.cancel:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    background: #eee;
+}
+
+/* 문의 폼 */
+.inquiry-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px dashed #ccc;
+    flex-shrink: 0;
+}
+
+.inquiry-form input,
+.inquiry-form textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Noto Sans KR", sans-serif;
+    background: white;
+    color: var(--nerf-grey);
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.inquiry-form input:focus,
+.inquiry-form textarea:focus {
+    outline: none;
+    border-color: var(--nerf-blue);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.inquiry-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+/* 섹션 & 버튼 리스트 */
+.section {
+    padding-top: 10px;
+    flex-shrink: 0;
+}
+
+.section-button {
+    background: var(--nerf-white);
+    padding: 16px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s;
+    font-weight: 700;
+    color: var(--nerf-grey);
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 0 #ddd;
+    margin-bottom: 5px;
+}
+
+.section-button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--nerf-blue);
+    border-color: var(--nerf-blue);
+    background: #f0f8ff;
+}
+
+.section-button span:first-child {
+    padding-left: 0;
+    font-size: 16px;
+}
+
+/* 회원 탈퇴 */
+.section-button:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 위험 버튼 */
+.section-button.danger {
+    color: var(--nerf-red);
+    border-color: #ffcccc;
+    background: #fff5f5;
+    box-shadow: 0 4px 0 #ffcccc;
+}
+
+.section-button.danger:hover {
+    background: var(--nerf-red);
+    color: white;
+    border-color: #990000;
+    box-shadow: 0 2px 0 #990000;
+}
+
+/* 화살표 */
+.arrow {
+    color: var(--nerf-grey);
+    transition: transform 0.3s ease;
+    font-weight: 900;
+}
+
+.arrow.rotate {
+    transform: rotate(90deg);
+}
+
+/* FAQ */
+.faq-content {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.faq-item {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    cursor: pointer;
+}
+
+.faq-item:hover {
+    border-color: var(--nerf-orange);
+    background: white;
+}
+
+.faq-question {
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.faq-answer {
+    display: none;
+    margin: 10px 0 0 0;
+    padding-top: 10px;
+    border-top: 2px dashed #ddd;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 문의 내역 & 상세 페이지 */
+.inquiry-history {
+    display: none;
+    flex-direction: column;
+    padding: 30px;
+    /* 히든 페이지도 흰색 카드로 표시 */
+    background: var(--nerf-white);
+    margin: 0 10px 10px 10px;
+    border-radius: 12px;
+    flex: 1;
+    overflow-y: auto;
+    color: var(--text-primary);
+}
+
+/* 문의 내역 테이블 */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+thead {
+    background: var(--nerf-grey);
+    color: white;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 2px solid var(--nerf-orange);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: var(--nerf-grey);
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #f0f8ff;
+}
+
+/* 상세 페이지 */
+.inquiry-detail-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.answer-box {
+    background: #f0fff0;
+    border: 2px solid var(--nerf-green);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.answer-box h4 {
+    margin: 0 0 10px 0;
+    color: var(--nerf-green);
+    font-weight: 800;
+}
+
+/* 연락처 */
+.contact {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #666;
+    flex-shrink: 0;
+}
+
+/* ========== 비밀번호/탈퇴 모달 (팝업) ========== */
+/* 팝업도 동일한 컨셉: 어두운 프레임 + 흰색 내용 */
+.password-modal,
+.withdraw-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.password-modal-content,
+.withdraw-modal-content {
+    background: var(--nerf-white);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 450px;
+    width: 90%;
+
+    /* 이중 테두리 효과 */
+    border: 4px solid var(--nerf-white);
+    outline: 4px solid var(--nerf-grey);
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    position: relative;
+    animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.withdraw-modal-content {
+    outline-color: var(--nerf-red);
+}
+
+/* 탈퇴는 빨간 프레임 */
+
+.password-modal-content h2,
+.withdraw-modal-content h2 {
+    margin: 0 0 20px 0;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--nerf-grey);
+    text-transform: uppercase;
+}
+
+/* 입력 그룹 */
+.password-input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.password-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.password-input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.password-input-group input:focus {
+    border-color: var(--nerf-blue);
+    outline: none;
+}
+
+/* 모달 버튼 */
+.password-modal-buttons,
+.withdraw-modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.password-modal-buttons button,
+.withdraw-modal-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+}
+
+.password-modal-buttons button:hover,
+.withdraw-modal-buttons button:hover {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.btn-primary {
+    background: var(--nerf-green);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--nerf-red);
+    color: white;
+}
+
+.btn-cancel {
+    background: #eee;
+    color: #666;
+}
+
+/* 스크롤바 */
+.main-content::-webkit-scrollbar,
+.inquiry-history::-webkit-scrollbar { 
+    width: 12px; /* 터치하기 편하게 조금 키움 */
+}
+
+.main-content::-webkit-scrollbar-track,
+.inquiry-history::-webkit-scrollbar-track { 
+    background: #e0e0e0; /* 트랙은 연한 회색 */
+    border-radius: 4px;
+    margin: 5px 0; /* 위아래 여백 */
+}
+
+.main-content::-webkit-scrollbar-thumb,
+.inquiry-history::-webkit-scrollbar-thumb { 
+    background: var(--nerf-orange); /* 오렌지색으로 변경하여 가시성 확보 */
+    border-radius: 6px; 
+    border: 3px solid #e0e0e0; /* 트랙 색상과 동일한 테두리로 둥근 느낌 강조 */
+    background-clip: content-box;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover,
+.inquiry-history::-webkit-scrollbar-thumb:hover { 
+    background: #ff8800; /* 호버 시 더 밝게 */
+    border-color: #e0e0e0;
+}
