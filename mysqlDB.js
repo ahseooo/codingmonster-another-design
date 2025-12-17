@@ -7,7 +7,12 @@ var pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     waitForConnections: true,
-    connectionLimit: 10
+    connectionLimit: 10,
+    port: 4000,
+    ssl: {
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+    }
 });
 
 pool.on('error', (err) => {
