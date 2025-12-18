@@ -7,7 +7,9 @@
 ## 🔗 링크
 
 <div align="center">
-    <img src="./assets/cdmst-logo.png" width="100">
+    <a href="https://codingmonster.vercel.app">
+        <img src="./assets/cdmst-logo.png" width="100">
+    </a>
     <h3>
         배포 링크: <a href="https://codingmonster.vercel.app">https://codingmonster.vercel.app</a>
     </h3>
